@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { loadPosts } from '../../actions/posts'
+import LikeUnlike from '../post/LikeUnlike'
 
 const Posts = ({ loadPosts, posts: { posts, postsLoading } }) => {
   useEffect(() => {
@@ -18,10 +19,19 @@ const Posts = ({ loadPosts, posts: { posts, postsLoading } }) => {
       <ul>
         {posts.map(post => (
           <li key={post._id}>
-            <Link to={`/posts/${post._id}`}>{post._id}</Link>
+            <Link to={`/users/${post.user._id}`}>{post.user.name}</Link>
             {post.image && (
-              <img src={Buffer.from(post.image, 'base64').toString('ascii')} />
+              <div>
+                <Link to={`/posts/${post._id}`}>
+                  <img
+                    src={Buffer.from(post.image, 'base64').toString('ascii')}
+                  />
+                </Link>
+              </div>
             )}
+            <div>
+              <LikeUnlike post={post} />
+            </div>
           </li>
         ))}
       </ul>

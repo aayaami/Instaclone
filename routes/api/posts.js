@@ -12,7 +12,7 @@ router.post(
   [
     auth,
     [
-      check('text', 'Text is required')
+      check('load', 'Image is required')
         .not()
         .isEmpty()
     ]
@@ -27,7 +27,6 @@ router.post(
       const user = await User.findById(req.user.id).select('-password')
 
       const newPost = await new Post({
-        text: req.body.text,
         user: req.user.id,
         image: req.body.load
       })
@@ -36,7 +35,7 @@ router.post(
 
       console.log(newPost)
 
-      // const post = await newPost.save()
+      const post = await newPost.save()
 
       res.json(post)
     } catch (err) {
@@ -51,7 +50,9 @@ router.post(
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
-    const posts = await Post.find().sort({ date: -1 })
+    const posts = await Post.find()
+      .sort({ date: -1 })
+      .populate({ path: 'user', select: 'name' })
     res.json(posts)
   } catch (err) {
     console.error(err.message)

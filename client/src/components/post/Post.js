@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { loadPost } from '../../actions/post'
+import LikeUnlike from './LikeUnlike'
 
 const Post = ({ loadPost, post: { post, postLoading }, match }) => {
   useEffect(() => {
@@ -15,7 +16,11 @@ const Post = ({ loadPost, post: { post, postLoading }, match }) => {
   } else {
     return (
       <Fragment>
-        {post._id} - {post.date}
+        {post.date}
+        <div>
+          <img src={Buffer.from(post.image, 'base64').toString('ascii')} />
+        </div>
+        <LikeUnlike post={post} />
       </Fragment>
     )
   }

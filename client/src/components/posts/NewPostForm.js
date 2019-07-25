@@ -5,18 +5,7 @@ import PropTypes from 'prop-types'
 import { get } from 'mongoose'
 
 const NewPostForm = ({ createPost }) => {
-  const [formData, setFormData] = useState({
-    text: '',
-    load: null
-  })
-
-  const handleChange = e => {
-    e.preventDefault()
-    setFormData({
-      ...formData,
-      text: e.target.value
-    })
-  }
+  const [formData, setFormData] = useState({ load: null })
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -39,33 +28,16 @@ const NewPostForm = ({ createPost }) => {
     }
 
     getBase64(e.target.files[0])
-
-    // console.log(e.target.files[0])
-    // setFormData({
-    //   ...formData,
-    //   load: e.target.files[0]
-    // })
   }
-
-  const handleClick = () => {
-    console.log({ formData })
-  }
-
-  const { text } = formData
 
   return (
     <Fragment>
       <form onSubmit={e => handleSubmit(e)}>
-        <input
-          type='text'
-          name='text'
-          value={text}
-          onChange={e => handleChange(e)}
-        />
         <input type='file' onChange={fileSelectedHandler} />
-        <button type='submit'>Upload</button>
+        <div>
+          <button type='submit'>Upload</button>
+        </div>
       </form>
-      <button onClick={handleClick}>Log</button>
       {formData.load && <img src={`${formData.load}`} />}
     </Fragment>
   )

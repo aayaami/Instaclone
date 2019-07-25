@@ -1,4 +1,4 @@
-import { LOAD_POST, CLEAR_POST } from '../actions/types'
+import { LOAD_POST, CLEAR_POST, LIKE_POST, UNLIKE_POST } from '../actions/types'
 
 const initialState = {
   post: null,
@@ -12,6 +12,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         post: payload,
+        postLoading: false
+      }
+    case UNLIKE_POST:
+    case LIKE_POST:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          likes: payload
+        },
         postLoading: false
       }
     case CLEAR_POST:

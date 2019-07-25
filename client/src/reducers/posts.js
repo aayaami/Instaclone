@@ -1,4 +1,9 @@
-import { LOAD_POSTS, CLEAR_POSTS } from '../actions/types'
+import {
+  LOAD_POSTS,
+  CLEAR_POSTS,
+  LIKE_POSTS,
+  UNLIKE_POSTS
+} from '../actions/types'
 
 const initialState = {
   posts: null,

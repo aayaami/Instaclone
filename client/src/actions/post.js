@@ -1,5 +1,15 @@
-import { LOAD_POST, CLEAR_POST, LOAD_POSTS, CLEAR_POSTS } from './types'
+import {
+  LOAD_POST,
+  CLEAR_POST,
+  LOAD_POSTS,
+  CLEAR_POSTS,
+  LIKE_POSTS,
+  LIKE_POST,
+  UNLIKE_POST,
+  UNLIKE_POSTS
+} from './types'
 import axios from 'axios'
+import store from '../store'
 
 export const loadPost = postId => async dispatch => {
   try {
@@ -40,5 +50,49 @@ export const createPost = ({ text, load }) => async dispatch => {
     dispatch({
       type: CLEAR_POSTS
     })
+  }
+}
+
+export const likePost = postId => async dispatch => {
+  try {
+    const res = await axios.put(`/api/posts/like/${postId}`)
+
+    if (!store.getState().posts.postsLoading) {
+      dispatch({
+        type: LIKE_POSTS,
+        payload: res.data
+      })
+    }
+
+    if (!store.getState().post.postLoading) {
+      dispatch({
+        type: LIKE_POST,
+        payload: res.data
+      })
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const unlikePost = postId => async dispatch => {
+  try {
+    const res = await axios.put(`/api/posts/unlike/${postId}`)
+
+    if (!store.getState().posts.postsLoading) {
+      dispatch({
+        type: UNLIKE_POSTS,
+        payload: res.data
+      })
+    }
+
+    if (!store.getState().post.postLoading) {
+      dispatch({
+        type: UNLIKE_POST,
+        payload: res.data
+      })
+    }
+  } catch (err) {
+    console.log(err)
   }
 }

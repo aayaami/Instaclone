@@ -6,7 +6,7 @@ const Comments = ({ comments, auth: { user } }) => {
   return comments ? (
     <ul>
       {comments.map(comment =>
-        user._id == comment.user._id ? (
+        user._id == comment.user ? (
           <li>
             {user.name} {comment.text}
           </li>

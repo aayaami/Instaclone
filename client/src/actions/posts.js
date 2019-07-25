@@ -1,4 +1,9 @@
-import { LOAD_POSTS, CLEAR_POSTS } from './types'
+import {
+  LOAD_POSTS,
+  CLEAR_POSTS,
+  LOAD_USER_PROFILE_POSTS,
+  CLEAR_USER_PROFILE_POSTS
+} from './types'
 import axios from 'axios'
 
 export const loadPosts = () => async dispatch => {
@@ -14,6 +19,24 @@ export const loadPosts = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: CLEAR_POSTS
+    })
+  }
+}
+
+export const loadUserProfilePosts = userId => async dispatch => {
+  try {
+    console.log(userId)
+    const res = await axios.get(`/api/posts/user/${userId}`)
+
+    console.log(res.data)
+
+    dispatch({
+      type: LOAD_USER_PROFILE_POSTS,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: CLEAR_USER_PROFILE_POSTS
     })
   }
 }

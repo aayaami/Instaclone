@@ -15,6 +15,7 @@ import WebSocketIo from './utils/WebSocketIo'
 import Posts from './components/posts/Posts'
 import NewPostForm from './components/posts/NewPostForm'
 import Post from './components/post/Post'
+import UserProfile from './components/users/UserProfile'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -37,6 +38,7 @@ function App() {
               <Route exact path='/' component={Landing} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
+              <PrivateRoute path='/users/:id' component={UserProfile} />
               <PrivateRoute path='/posts/create' component={NewPostForm} />
               <PrivateRoute exact path='/posts' component={Posts} />
               <PrivateRoute exact path='/posts/:id' component={Post} />

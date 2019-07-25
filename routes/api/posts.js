@@ -64,6 +64,26 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
+// @route   GET api/posts
+// @desc    Get all posts of certain user
+// @access  Private
+router.get('/user/:id', auth, async (req, res) => {
+  try {
+    const posts = await Post.find({ user: req.params.id })
+      .sort({ date: -1 })
+      .populate({ path: 'user', select: 'name' })
+      .populate({
+        path: 'comments.user',
+        select: 'name'
+      })
+
+    res.json(posts)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
 // @route   GET api/posts/:id
 // @desc    Get post by ID
 // @access  Private

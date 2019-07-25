@@ -2,7 +2,10 @@ import {
   LOAD_POSTS,
   CLEAR_POSTS,
   LIKE_POSTS,
-  UNLIKE_POSTS
+  UNLIKE_POSTS,
+  CREATE_COMMENT_POSTS,
+  LOAD_USER_PROFILE_POSTS,
+  CLEAR_USER_PROFILE_POSTS
 } from '../actions/types'
 
 const initialState = {
@@ -14,6 +17,7 @@ export default function(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case LOAD_POSTS:
+    case LOAD_USER_PROFILE_POSTS:
       return {
         ...state,
         posts: payload,
@@ -28,7 +32,18 @@ export default function(state = initialState, action) {
         ),
         postsLoading: false
       }
+    case CREATE_COMMENT_POSTS:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post._id == payload._id
+            ? { ...post, comments: payload.comments }
+            : post
+        ),
+        postsLoading: false
+      }
     case CLEAR_POSTS:
+    case CLEAR_USER_PROFILE_POSTS:
       return {
         ...state,
         posts: null,

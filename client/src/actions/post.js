@@ -6,7 +6,9 @@ import {
   LIKE_POSTS,
   LIKE_POST,
   UNLIKE_POST,
-  UNLIKE_POSTS
+  UNLIKE_POSTS,
+  CREATE_COMMENT_POST,
+  CREATE_COMMENT_POSTS
 } from './types'
 import axios from 'axios'
 import store from '../store'
@@ -105,20 +107,22 @@ export const createComment = ({ text, postId }) => async dispatch => {
   }
   const body = { text }
   try {
-    // await axios.post('/api/posts', body, config)
-    console.log(postId)
-
     const res = await axios.post(`/api/posts/comment/${postId}`, body, config)
 
-    console.log(res.data)
+    if (!store.getState().posts.postsLoading) {
+      dispatch({
+        type: CREATE_COMMENT_POSTS,
+        payload: res.data
+      })
+    }
 
-    // dispatch({
-    //   type: LOAD_POSTS,
-    //   payload: res.data
-    // })
+    if (!store.getState().post.postLoading) {
+      dispatch({
+        type: CREATE_COMMENT_POST,
+        payload: res.data
+      })
+    }
   } catch (err) {
-    // dispatch({
-    //   type: CLEAR_POSTS
-    // })
+    console.log(err)
   }
 }

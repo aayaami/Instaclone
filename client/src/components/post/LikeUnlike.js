@@ -26,13 +26,15 @@ const LikeUnlike = ({
     }
   }, [likes, user])
 
+  const likesNumber = likes.length != 0 ? likes.length : null
+
   return isLiked ? (
     <button className='button-like liked' onClick={() => unlikePost(_id)}>
-      Unlike
+      Unlike {likesNumber}
     </button>
   ) : (
     <button className='button-like' onClick={() => likePost(_id)}>
-      Like
+      Like {likesNumber}
     </button>
   )
 }

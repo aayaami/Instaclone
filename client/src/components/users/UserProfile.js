@@ -8,6 +8,7 @@ import FollowUnfollow from './FollowUnfollow'
 
 const User = ({
   userProfile: { userProfile, userProfileLoading },
+  auth: { user },
   match,
   loadUserProfile,
   loadUserProfilePosts
@@ -20,7 +21,9 @@ const User = ({
     <div>Loading</div>
   ) : (
     <div>
-      <FollowUnfollow userProfile={userProfile} />
+      {userProfile._id !== user._id ? (
+        <FollowUnfollow userProfile={userProfile} />
+      ) : null}
       {userProfile.name}
       <UserProfilePosts />
     </div>
@@ -28,11 +31,13 @@ const User = ({
 }
 
 User.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  userProfile: state.userProfile
+  userProfile: state.userProfile,
+  auth: state.auth
 })
 
 export default connect(

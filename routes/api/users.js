@@ -87,13 +87,17 @@ router.get('/:userId', auth, async (req, res) => {
 // @desc    Follow User
 // @access  Private
 router.put('/follow/:id', auth, async (req, res) => {
+  if (req.params.id === req.user.id) {
+    return res.status(400).json({ msg: "You can't follow yourself" })
+  }
   try {
     console.log(req.params.id, 'follow')
-    const user = await User.findById(req.params.id)
+    const userToFollow = await User.findById(req.params.id)
+    const userFollowing = await User.findById(req.user.id)
 
     // Check if the user has already been followed
     if (
-      user.followers.filter(
+      userToFollow.followers.filter(
         follower => follower.user.toString() === req.user.id
       ).length > 0
     ) {
@@ -102,11 +106,24 @@ router.put('/follow/:id', auth, async (req, res) => {
         .json({ msg: 'You are already following this user' })
     }
 
-    user.followers.unshift({ user: req.user.id })
+    // Check if the user has already following
+    if (
+      userFollowing.following.filter(
+        follow => follow.user.toString() === req.params.id
+      ).length > 0
+    ) {
+      return res
+        .status(400)
+        .json({ msg: 'You are already following this user' })
+    }
 
-    await user.save()
+    userToFollow.followers.unshift({ user: req.user.id })
+    userFollowing.following.unshift({ user: req.params.id })
 
-    res.json({ _id: user._id, followers: user.followers })
+    await userToFollow.save()
+    await userFollowing.save()
+
+    res.json({ _id: userToFollow._id, followers: userToFollow.followers })
   } catch (error) {
     console.error(err.message)
     res.status(500).send('Server error')
@@ -119,27 +136,46 @@ router.put('/follow/:id', auth, async (req, res) => {
 router.put('/unfollow/:id', auth, async (req, res) => {
   try {
     console.log(req.params.id, 'unfollow')
-    const user = await User.findById(req.params.id)
+    const userToFollow = await User.findById(req.params.id)
+    const userFollowing = await User.findById(req.user.id)
 
     // Check if the user has already been followed
     if (
-      user.followers.filter(
+      userToFollow.followers.filter(
         follower => follower.user.toString() === req.user.id
       ).length === 0
     ) {
       return res.status(400).json({ msg: 'User has not been yet followed' })
     }
 
+    // Check if the user has already been followed
+    if (
+      userFollowing.following.filter(
+        follow => follow.user.toString() === req.params.id
+      ).length === 0
+    ) {
+      return res.status(400).json({ msg: 'User has not been yet followed' })
+    }
+
+    console.log(req.params.id, 'unfollow')
+
     // Get remove index
-    const removeIndex = user.followers
+    const removeIndex = userToFollow.followers
       .map(follower => follower.user.toString())
       .indexOf(req.user.id)
 
-    user.followers.splice(removeIndex, 1)
+    // Get remove index 2
+    const removeIndex2 = userFollowing.following
+      .map(follow => follow.user.toString())
+      .indexOf(req.params.id)
 
-    await user.save()
+    userToFollow.followers.splice(removeIndex, 1)
+    userFollowing.following.splice(removeIndex2, 1)
 
-    res.json({ _id: user._id, followers: user.followers })
+    await userToFollow.save()
+    await userFollowing.save()
+
+    res.json({ _id: userToFollow._id, followers: userToFollow.followers })
   } catch (error) {
     console.error(err.message)
     res.status(500).send('Server error')

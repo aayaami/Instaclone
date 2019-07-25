@@ -2,14 +2,23 @@ import React, { Fragment, useState } from 'react'
 import { createPost } from '../../actions/post'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { get } from 'mongoose'
+import Cropper from 'react-easy-crop'
+import getCroppedImg from './cropImage'
 
 const NewPostForm = ({ createPost }) => {
-  const [formData, setFormData] = useState({ load: null })
+  const [formData, setFormData] = useState({
+    image: null,
+    crop: { x: 0, y: 0 },
+    zoom: 1,
+    aspect: 4 / 4,
+    croppedAreaPixels: null,
+    croppedImage: null
+  })
+  const [display, setDisplay] = useState('block')
 
   const handleSubmit = e => {
     e.preventDefault()
-    createPost(formData)
+    createPost({ load: formData.croppedImage })
   }
 
   const fileSelectedHandler = async e => {
@@ -19,7 +28,7 @@ const NewPostForm = ({ createPost }) => {
       reader.onload = () => {
         setFormData({
           ...formData,
-          load: reader.result
+          image: reader.result
         })
       }
       reader.onerror = function(error) {
@@ -30,6 +39,28 @@ const NewPostForm = ({ createPost }) => {
     getBase64(e.target.files[0])
   }
 
+  const onCropChange = crop => {
+    setFormData({ ...formData, crop })
+  }
+
+  const onCropComplete = (croppedArea, croppedAreaPixels) => {
+    setFormData({ ...formData, croppedAreaPixels })
+  }
+
+  const onZoomChange = zoom => {
+    setFormData({ ...formData, zoom })
+  }
+
+  const cropImage = async () => {
+    const croppedImage = await getCroppedImg(
+      formData.image,
+      formData.croppedAreaPixels
+    )
+    setDisplay('none')
+    console.log(croppedImage)
+    setFormData({ ...formData, croppedImage })
+  }
+
   return (
     <Fragment>
       <form onSubmit={e => handleSubmit(e)}>
@@ -38,7 +69,23 @@ const NewPostForm = ({ createPost }) => {
           <button type='submit'>Upload</button>
         </div>
       </form>
-      {formData.load && <img src={`${formData.load}`} />}
+      {formData.image && (
+        <div className='crop-container' style={{ display: display }}>
+          <Cropper
+            image={formData.image}
+            crop={formData.crop}
+            zoom={formData.zoom}
+            aspect={formData.aspect}
+            onCropChange={onCropChange}
+            onCropComplete={onCropComplete}
+            onZoomChange={onZoomChange}
+          />
+          <div className='controls' onClick={cropImage} />
+        </div>
+      )}
+
+      {/* {formData.image && <img src={`${formData.image}`} />} */}
+      {formData.croppedImage && <img src={`${formData.croppedImage}`} />}
     </Fragment>
   )
 }

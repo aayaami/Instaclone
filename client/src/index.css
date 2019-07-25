@@ -14,8 +14,7 @@ a {
 }
 
 img {
-  width: 20rem;
-  height: 20rem;
+  width: 20%;
 }
 
 /* Like Button */
@@ -86,4 +85,26 @@ img {
 .liked:hover .fa,
 .liked:hover span {
   color: #fefefe;
+}
+
+/* Controls */
+.crop-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+}
+
+.controls {
+  background: red;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 100%;
+  padding: 0 16px;
+  height: 80px;
+  display: flex;
+  align-items: center;
 }

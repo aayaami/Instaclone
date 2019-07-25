@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { loadPost } from '../../actions/post'
 import LikeUnlike from './LikeUnlike'
+import Comments from './Comments'
+import NewCommentForm from './NewCommentForm'
 
 const Post = ({ loadPost, post: { post, postLoading }, match }) => {
   useEffect(() => {
@@ -21,6 +23,8 @@ const Post = ({ loadPost, post: { post, postLoading }, match }) => {
           <img src={Buffer.from(post.image, 'base64').toString('ascii')} />
         </div>
         <LikeUnlike post={post} />
+        <Comments comments={post.comments} />
+        <NewCommentForm postId={post._id} />
       </Fragment>
     )
   }

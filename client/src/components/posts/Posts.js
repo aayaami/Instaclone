@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { loadPosts } from '../../actions/posts'
 import LikeUnlike from '../post/LikeUnlike'
+import Comments from '../post/Comments'
 
 const Posts = ({ loadPosts, posts: { posts, postsLoading } }) => {
   useEffect(() => {
@@ -31,6 +32,7 @@ const Posts = ({ loadPosts, posts: { posts, postsLoading } }) => {
             )}
             <div>
               <LikeUnlike post={post} />
+              <Comments comments={post.comments} />
             </div>
           </li>
         ))}

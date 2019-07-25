@@ -53,6 +53,10 @@ router.get('/', auth, async (req, res) => {
     const posts = await Post.find()
       .sort({ date: -1 })
       .populate({ path: 'user', select: 'name' })
+      .populate({
+        path: 'comments.user',
+        select: 'name'
+      })
     res.json(posts)
   } catch (err) {
     console.error(err.message)
@@ -65,7 +69,10 @@ router.get('/', auth, async (req, res) => {
 // @access  Private
 router.get('/:id', auth, async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id)
+    const post = await Post.findById(req.params.id).populate({
+      path: 'comments.user',
+      select: 'name'
+    })
     if (!post) {
       return res.status(404).json({ msg: 'Post not found' })
     }
@@ -124,7 +131,7 @@ router.put('/like/:id', auth, async (req, res) => {
 
     await post.save()
 
-    res.json(post.likes)
+    res.json({ _id: post._id, likes: post.likes })
   } catch (error) {
     console.error(err.message)
     res.status(500).send('Server error')
@@ -155,7 +162,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
     await post.save()
 
-    res.json(post.likes)
+    res.json({ _id: post._id, likes: post.likes })
   } catch (error) {
     console.error(err.message)
     res.status(500).send('Server error')
@@ -183,7 +190,10 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select('-password')
-      const post = await Post.findById(req.params.id)
+      const post = await Post.findById(req.params.id).populate({
+        path: 'comments.user',
+        select: 'name'
+      })
 
       const newComment = {
         text: req.body.text,
@@ -191,12 +201,11 @@ router.post(
         avatar: user.avatar,
         user: req.user.id
       }
-
       post.comments.unshift(newComment)
 
       await post.save()
 
-      res.json(post.comments)
+      res.json({ comments: post.comments, _id: post._id })
     } catch (err) {
       console.error(err.message)
       res.status(500).send('Server Error')
@@ -209,7 +218,10 @@ router.post(
 // @access  Private
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id)
+    const post = await Post.findById(req.params.id).populate({
+      path: 'comments.user',
+      select: 'name'
+    })
     // Pull out comment
     const comment = post.comments.find(
       comment => comment.id === req.params.comment_id
@@ -234,7 +246,7 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 
     await post.save()
 
-    res.json(post.comments)
+    res.json({ comments: post.comments, _id: post._id })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('Server Error')

@@ -96,3 +96,29 @@ export const unlikePost = postId => async dispatch => {
     console.log(err)
   }
 }
+
+export const createComment = ({ text, postId }) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  const body = { text }
+  try {
+    // await axios.post('/api/posts', body, config)
+    console.log(postId)
+
+    const res = await axios.post(`/api/posts/comment/${postId}`, body, config)
+
+    console.log(res.data)
+
+    // dispatch({
+    //   type: LOAD_POSTS,
+    //   payload: res.data
+    // })
+  } catch (err) {
+    // dispatch({
+    //   type: CLEAR_POSTS
+    // })
+  }
+}

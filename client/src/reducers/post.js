@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
         ...state,
         post: {
           ...state.post,
-          likes: payload
+          likes: payload.likes
         },
         postLoading: false
       }

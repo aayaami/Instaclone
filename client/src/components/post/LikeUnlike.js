@@ -38,7 +38,7 @@ const LikeUnlike = ({
 }
 
 LikeUnlike.propTypes = {
-  auth: PropTypes.string.isRequired,
+  auth: PropTypes.object.isRequired,
   likePost: PropTypes.func.isRequired,
   unlikePost: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired

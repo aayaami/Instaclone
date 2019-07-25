@@ -18,13 +18,13 @@ export const loadPost = postId => async dispatch => {
   }
 }
 
-export const createPost = ({ text }) => async dispatch => {
+export const createPost = ({ text, load }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
-  const body = { text }
+  const body = { text, load }
   try {
     await axios.post('/api/posts', body, config)
 

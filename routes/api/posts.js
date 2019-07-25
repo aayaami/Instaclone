@@ -26,12 +26,17 @@ router.post(
     try {
       const user = await User.findById(req.user.id).select('-password')
 
-      const newPost = new Post({
+      const newPost = await new Post({
         text: req.body.text,
-        user: req.user.id
+        user: req.user.id,
+        image: req.body.load
       })
 
-      const post = await newPost.save()
+      // saveImage(newPost, req.body.load)
+
+      console.log(newPost)
+
+      // const post = await newPost.save()
 
       res.json(post)
     } catch (err) {
@@ -234,5 +239,13 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     res.status(500).send('Server Error')
   }
 })
+
+function saveImage(post, imageEncoded) {
+  if (imageEncoded == null) return
+  const image = JSON.parse(imageEncoded)
+  if (image != null) {
+    post.image = image.data
+  }
+}
 
 module.exports = router

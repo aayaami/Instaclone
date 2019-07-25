@@ -19,6 +19,9 @@ const Posts = ({ loadPosts, posts: { posts, postsLoading } }) => {
         {posts.map(post => (
           <li key={post._id}>
             <Link to={`/posts/${post._id}`}>{post._id}</Link>
+            {post.image && (
+              <img src={Buffer.from(post.image, 'base64').toString('ascii')} />
+            )}
           </li>
         ))}
       </ul>

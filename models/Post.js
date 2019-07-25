@@ -14,6 +14,10 @@ const PostSchema = new Schema({
       }
     }
   ],
+  image: {
+    type: Buffer,
+    required: true
+  },
   comments: [
     {
       user: {

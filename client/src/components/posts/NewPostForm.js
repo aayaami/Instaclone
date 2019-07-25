@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { createPost } from '../../actions/post'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { get } from 'mongoose'
 
 const NewPostForm = ({ createPost }) => {
   const [formData, setFormData] = useState({
@@ -22,11 +23,28 @@ const NewPostForm = ({ createPost }) => {
     createPost(formData)
   }
 
-  const fileSelectedHandler = e => {
-    setFormData({
-      ...formData,
-      load: e.target.files[0]
-    })
+  const fileSelectedHandler = async e => {
+    const getBase64 = file => {
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        setFormData({
+          ...formData,
+          load: reader.result
+        })
+      }
+      reader.onerror = function(error) {
+        console.log('Error: ', error)
+      }
+    }
+
+    getBase64(e.target.files[0])
+
+    // console.log(e.target.files[0])
+    // setFormData({
+    //   ...formData,
+    //   load: e.target.files[0]
+    // })
   }
 
   const handleClick = () => {
@@ -48,6 +66,7 @@ const NewPostForm = ({ createPost }) => {
         <button type='submit'>Upload</button>
       </form>
       <button onClick={handleClick}>Log</button>
+      {formData.load && <img src={`${formData.load}`} />}
     </Fragment>
   )
 }

@@ -10,7 +10,6 @@ export const loadUserProfile = userId => async dispatch => {
   try {
     const res = await axios.get(`/api/users/${userId}`)
 
-    console.log(res.data)
     dispatch({
       type: LOAD_USER_PROFILE,
       payload: res.data

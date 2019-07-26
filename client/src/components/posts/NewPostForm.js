@@ -10,7 +10,7 @@ const NewPostForm = ({ createPost }) => {
     image: null,
     crop: { x: 0, y: 0 },
     zoom: 1,
-    aspect: 4 / 4,
+    aspect: 1 / 1,
     croppedAreaPixels: null,
     croppedImage: null
   })
@@ -57,7 +57,6 @@ const NewPostForm = ({ createPost }) => {
       formData.croppedAreaPixels
     )
     setDisplay('none')
-    console.log(croppedImage)
     setFormData({ ...formData, croppedImage })
   }
 
@@ -80,7 +79,9 @@ const NewPostForm = ({ createPost }) => {
             onCropComplete={onCropComplete}
             onZoomChange={onZoomChange}
           />
-          <div className='controls' onClick={cropImage} />
+          <div className='controls' onClick={cropImage}>
+            Crop
+          </div>
         </div>
       )}
 

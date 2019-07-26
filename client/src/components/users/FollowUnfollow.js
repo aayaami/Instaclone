@@ -40,8 +40,7 @@ const FollowUnfollow = ({
 FollowUnfollow.propTypes = {
   auth: PropTypes.object.isRequired,
   followUser: PropTypes.func.isRequired,
-  unfollowUser: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  unfollowUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

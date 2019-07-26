@@ -5,6 +5,7 @@ import socket from './socket'
 import posts from './posts'
 import post from './post'
 import userProfile from './userProfile'
+import chat from './chat'
 
 export default combineReducers({
   alert,
@@ -12,5 +13,6 @@ export default combineReducers({
   socket,
   posts,
   post,
-  userProfile
+  userProfile,
+  chat
 })

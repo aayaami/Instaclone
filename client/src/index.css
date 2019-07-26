@@ -17,6 +17,15 @@ img {
   width: 20%;
 }
 
+.css-1dkwqii {
+  overflow: visible !important;
+}
+
+.css-bdjl4r {
+  width: 400px !important;
+  height: 400px !important;
+}
+
 /* Like Button */
 
 .button-like {
@@ -70,8 +79,9 @@ img {
   color: #fefefe;
 }
 
-.liked:focus {
-}
+/* .liked:focus {
+  
+} */
 
 .liked:focus .fa,
 .liked:focus span {
@@ -97,14 +107,16 @@ img {
 }
 
 .controls {
-  background: red;
+  background: lightblue;
   box-sizing: border-box;
   position: absolute;
   bottom: 0;
   left: 0%;
-  width: 100%;
+  width: 20%;
+  margin: 0 0 0 40%;
   padding: 0 16px;
   height: 80px;
-  display: flex;
-  align-items: center;
+  color: #fff;
+  font-size: 4rem;
+  text-align: center;
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loadUserProfile } from '../../actions/userProfile'
 import { loadUserProfilePosts } from '../../actions/posts'
@@ -36,8 +37,13 @@ const User = ({
     ) : (
       <div>
         {userProfile._id !== user._id ? (
-          <FollowUnfollow userProfile={userProfile} />
-        ) : null}
+          <Fragment>
+            <FollowUnfollow userProfile={userProfile} />
+            <Link to={`/chats/${userProfile._id}`}>Send Message</Link>
+          </Fragment>
+        ) : (
+          <Link to='/posts/create'>Create Post</Link>
+        )}
         {userProfile.name}
         <UserProfilePosts />
       </div>
@@ -46,7 +52,6 @@ const User = ({
 }
 
 User.propTypes = {
-  user: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 }
 

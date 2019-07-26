@@ -20,9 +20,6 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
       ) : null}
 
       <li>
-        <Link to='/posts/create'>Create Post</Link>
-      </li>
-      <li>
         <a onClick={logout} href='#!'>
           Logout
         </a>

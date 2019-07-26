@@ -91,7 +91,6 @@ router.put('/follow/:id', auth, async (req, res) => {
     return res.status(400).json({ msg: "You can't follow yourself" })
   }
   try {
-    console.log(req.params.id, 'follow')
     const userToFollow = await User.findById(req.params.id)
     const userFollowing = await User.findById(req.user.id)
 
@@ -135,7 +134,6 @@ router.put('/follow/:id', auth, async (req, res) => {
 // @access  Private
 router.put('/unfollow/:id', auth, async (req, res) => {
   try {
-    console.log(req.params.id, 'unfollow')
     const userToFollow = await User.findById(req.params.id)
     const userFollowing = await User.findById(req.user.id)
 
@@ -156,8 +154,6 @@ router.put('/unfollow/:id', auth, async (req, res) => {
     ) {
       return res.status(400).json({ msg: 'User has not been yet followed' })
     }
-
-    console.log(req.params.id, 'unfollow')
 
     // Get remove index
     const removeIndex = userToFollow.followers

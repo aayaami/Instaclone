@@ -10,9 +10,6 @@ import axios from 'axios'
 export const loadPosts = () => async dispatch => {
   try {
     const res = await axios.get('/api/posts')
-
-    console.log(res.data)
-
     dispatch({
       type: LOAD_POSTS,
       payload: res.data
@@ -28,8 +25,6 @@ export const loadPostsFeed = () => async dispatch => {
   try {
     const res = await axios.get('/api/posts/feed')
 
-    console.log(res.data)
-
     dispatch({
       type: LOAD_POSTS_FEED,
       payload: res.data
@@ -43,10 +38,7 @@ export const loadPostsFeed = () => async dispatch => {
 
 export const loadUserProfilePosts = userId => async dispatch => {
   try {
-    console.log(userId)
     const res = await axios.get(`/api/posts/user/${userId}`)
-
-    console.log(res.data)
 
     dispatch({
       type: LOAD_USER_PROFILE_POSTS,

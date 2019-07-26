@@ -17,8 +17,6 @@ export const loadPost = postId => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/${postId}`)
 
-    console.log(res.data)
-
     dispatch({
       type: LOAD_POST,
       payload: res.data
@@ -41,8 +39,6 @@ export const createPost = ({ text, load }) => async dispatch => {
     await axios.post('/api/posts', body, config)
 
     const res = await axios.get('/api/posts')
-
-    console.log(res.data)
 
     dispatch({
       type: LOAD_POSTS,

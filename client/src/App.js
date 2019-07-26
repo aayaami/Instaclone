@@ -17,6 +17,7 @@ import NewPostForm from './components/posts/NewPostForm'
 import Post from './components/post/Post'
 import UserProfile from './components/users/UserProfile'
 import PostsFeed from './components/posts/PostsFeed'
+import Chat from './components/chats/Chat'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -39,6 +40,7 @@ function App() {
               <Route exact path='/' component={Landing} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
+              <PrivateRoute path='/chats/:id' component={Chat} />
               <PrivateRoute path='/users/:id' component={UserProfile} />
               <PrivateRoute path='/posts/create' component={NewPostForm} />
               <PrivateRoute path='/posts/feed' component={PostsFeed} />

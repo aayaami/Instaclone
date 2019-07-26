@@ -33,8 +33,6 @@ router.post(
 
       // saveImage(newPost, req.body.load)
 
-      console.log(newPost)
-
       const post = await newPost.save()
 
       res.json(post)
@@ -71,7 +69,6 @@ router.get('/feed', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id)
     const following = user.following.map(follow => follow.user)
-    console.log(following)
     const posts = await Post.find()
       .where('user')
       .in(following)

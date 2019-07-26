@@ -27,7 +27,7 @@ export default function(state = initialState, action) {
           ...state.userProfile,
           followers: payload.followers
         },
-        postLoading: false
+        userProfileLoading: false
       }
     case CLEAR_USER_PROFILE:
       return {

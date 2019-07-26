@@ -4,12 +4,21 @@ import { connect } from 'react-redux'
 import { logout } from '../../actions/auth'
 import PropTypes from 'prop-types'
 
-const Navbar = ({ logout, auth: { isAuthenticated, loading } }) => {
+const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
   const authLinks = (
     <ul>
       <li>
-        <Link to='/posts'>Posts</Link>
+        <Link to='/posts/globalfeed'>Global Feed</Link>
       </li>
+      <li>
+        <Link to='/posts/feed'>Feed</Link>
+      </li>
+      {user ? (
+        <li>
+          <Link to={`/users/${user._id}`}>My Profile</Link>
+        </li>
+      ) : null}
+
       <li>
         <Link to='/posts/create'>Create Post</Link>
       </li>

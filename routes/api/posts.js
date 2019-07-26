@@ -64,6 +64,30 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
+// @route   GET api/posts/feed
+// @desc    Get feed
+// @access  Private
+router.get('/feed', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id)
+    const following = user.following.map(follow => follow.user)
+    console.log(following)
+    const posts = await Post.find()
+      .where('user')
+      .in(following)
+      .sort({ date: -1 })
+      .populate({ path: 'user', select: 'name' })
+      .populate({
+        path: 'comments.user',
+        select: 'name'
+      })
+    res.json(posts)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
 // @route   GET api/posts
 // @desc    Get all posts of certain user
 // @access  Private

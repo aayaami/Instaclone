@@ -5,7 +5,8 @@ import {
   UNLIKE_POSTS,
   CREATE_COMMENT_POSTS,
   LOAD_USER_PROFILE_POSTS,
-  CLEAR_USER_PROFILE_POSTS
+  CLEAR_USER_PROFILE_POSTS,
+  LOAD_POSTS_FEED
 } from '../actions/types'
 
 const initialState = {
@@ -18,6 +19,7 @@ export default function(state = initialState, action) {
   switch (type) {
     case LOAD_POSTS:
     case LOAD_USER_PROFILE_POSTS:
+    case LOAD_POSTS_FEED:
       return {
         ...state,
         posts: payload,

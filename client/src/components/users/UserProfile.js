@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { loadUserProfile } from '../../actions/userProfile'
@@ -8,7 +8,7 @@ import FollowUnfollow from './FollowUnfollow'
 
 const User = ({
   userProfile: { userProfile, userProfileLoading },
-  auth: { user },
+  auth: { user, loading },
   match,
   loadUserProfile,
   loadUserProfilePosts
@@ -17,17 +17,32 @@ const User = ({
     loadUserProfile(match.params.id)
     loadUserProfilePosts(match.params.id)
   }, [])
-  return userProfileLoading ? (
-    <div>Loading</div>
-  ) : (
-    <div>
-      {userProfile._id !== user._id ? (
-        <FollowUnfollow userProfile={userProfile} />
-      ) : null}
-      {userProfile.name}
-      <UserProfilePosts />
-    </div>
-  )
+  // return userProfileLoading ? (
+  //   <div>Loading</div>
+  // ) : (
+  //   <div>
+  //     {userProfile._id !== user._id ? (
+  //       <FollowUnfollow userProfile={userProfile} />
+  //     ) : null}
+  //     {userProfile.name}
+  //     <UserProfilePosts />
+  //   </div>
+  // )
+  if (loading) {
+    return <Fragment>Loading</Fragment>
+  } else {
+    return userProfileLoading ? (
+      <Fragment>Loading</Fragment>
+    ) : (
+      <div>
+        {userProfile._id !== user._id ? (
+          <FollowUnfollow userProfile={userProfile} />
+        ) : null}
+        {userProfile.name}
+        <UserProfilePosts />
+      </div>
+    )
+  }
 }
 
 User.propTypes = {

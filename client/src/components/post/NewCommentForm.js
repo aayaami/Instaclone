@@ -17,7 +17,9 @@ const NewCommentForm = ({ createComment, postId }) => {
   )
 }
 
-NewCommentForm.propTypes = {}
+NewCommentForm.propTypes = {
+  createComment: PropTypes.func.isRequired
+}
 
 export default connect(
   null,

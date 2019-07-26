@@ -5,6 +5,9 @@ import { loadPost } from '../../actions/post'
 import LikeUnlike from './LikeUnlike'
 import Comments from './Comments'
 import NewCommentForm from './NewCommentForm'
+import Spinner from '../layout/Spinner'
+import NoPosts from '../layout/NoPosts'
+import { Link } from 'react-router-dom'
 
 const Post = ({ loadPost, post: { post, postLoading }, match }) => {
   useEffect(() => {
@@ -12,21 +15,27 @@ const Post = ({ loadPost, post: { post, postLoading }, match }) => {
   }, [])
 
   if (postLoading) {
-    return <Fragment />
+    return <Spinner />
   } else if (!post) {
-    return <Fragment />
+    return <NoPosts />
   } else {
     return (
       <section className='content'>
-        <div className='post'>
-          {post.user.name}
-          <div>
-            <img src={Buffer.from(post.image, 'base64').toString('ascii')} />
-          </div>
-          <LikeUnlike post={post} />
-          <Comments comments={post.comments} />
-          <NewCommentForm postId={post._id} />
-        </div>
+        <li key={post._id} className='post'>
+          <span className='nickname'>{post.user.name}</span>
+          {post.image && (
+            <div>
+              <img src={Buffer.from(post.image, 'base64').toString('ascii')} />
+            </div>
+          )}
+          <Fragment>
+            <LikeUnlike post={post} />
+            {post.comments.length > 0 ? (
+              <Comments comments={post.comments} />
+            ) : null}
+            <NewCommentForm postId={post._id} />
+          </Fragment>
+        </li>
       </section>
     )
   }

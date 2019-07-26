@@ -1,11 +1,24 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Landing = () => {
-    return (
-        <section className="container">
-            
-        </section>
-    )
+const Landing = ({ auth: { isAuthenticated } }) => {
+  if (isAuthenticated) {
+    return <Redirect to='/posts/feed' />
+  }
+  return <section className='container' />
 }
 
-export default Landing
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Landing)

@@ -7,6 +7,8 @@ import LikeUnlike from '../post/LikeUnlike'
 import Comments from '../post/Comments'
 import NewCommentForm from '../post/NewCommentForm'
 import PostsList from './PostsList'
+import Spinner from '../layout/Spinner'
+import NoPosts from '../layout/NoPosts'
 
 const Posts = ({ loadPosts, posts: { posts, postsLoading } }) => {
   useEffect(() => {
@@ -14,9 +16,9 @@ const Posts = ({ loadPosts, posts: { posts, postsLoading } }) => {
   }, [])
 
   if (postsLoading) {
-    return <Fragment />
+    return <Spinner />
   } else if (posts.length < 1) {
-    return <Fragment />
+    return <NoPosts />
   } else {
     return <PostsList posts={posts} />
   }

@@ -1,20 +1,20 @@
-import React, { Fragment, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { createPost } from '../../actions/post'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Cropper from 'react-easy-crop'
 import getCroppedImg from './cropImage'
-
 const NewPostForm = ({ createPost }) => {
   const inputFile = useRef()
-  const [formData, setFormData] = useState({
+  const initialState = {
     image: null,
     crop: { x: 0, y: 0 },
     zoom: 1,
     aspect: 1 / 1,
     croppedAreaPixels: null,
     croppedImage: null
-  })
+  }
+  const [formData, setFormData] = useState(initialState)
   const [display, setDisplay] = useState('block')
 
   const handleSubmit = e => {
@@ -25,6 +25,9 @@ const NewPostForm = ({ createPost }) => {
   const fileSelectedHandler = async e => {
     if (e.target.files.length === 0) {
       return
+    } else {
+      setFormData(initialState)
+      setDisplay('block')
     }
     const getBase64 = file => {
       let reader = new FileReader()
@@ -107,9 +110,15 @@ const NewPostForm = ({ createPost }) => {
               />
               <button
                 className='btn-action controls'
-                style={{ margin: '0rem 40%' }}
+                style={{
+                  margin: '0rem 15%',
+                  textAlign: 'center',
+                  width: '70%'
+                }}
                 onClick={cropImage}
-              />
+              >
+                Crop
+              </button>
             </div>
           )}
 

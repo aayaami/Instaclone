@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Messages from './Messages'
 import MessageForm from './MessageForm'
 import { loadUser } from '../../actions/auth'
+import Spinner from '../layout/Spinner'
 
 const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop)
 
@@ -55,7 +56,7 @@ const Chat = ({
   if (!loading && !socketLoading && user) {
     return (
       <Fragment>
-        <section className='container'>
+        <section className='content'>
           <Messages messages={chat.messages} />
           <MessageForm
             userId={user._id}
@@ -67,7 +68,7 @@ const Chat = ({
       </Fragment>
     )
   } else {
-    return <Fragment>Loading</Fragment>
+    return <Spinner />
   }
 }
 

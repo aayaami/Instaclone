@@ -7,6 +7,7 @@
 
 .css-1dkwqii {
   overflow: visible !important;
+  display: none;
 }
 
 .css-bdjl4r {
@@ -34,7 +35,7 @@
   padding: 0 16px;
   height: 80px;
   color: #fff;
-  font-size: 4rem;
+  font-size: 2rem;
   text-align: center;
 }
 
@@ -305,6 +306,42 @@ ul {
 }
 
 .form-comment input:focus {
+  outline: none;
+}
+
+.messages {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  width: 100%;
+  margin-top: 1rem;
+  height: 80vh;
+  background: #fff;
+  border: 1px solid #dddddd;
+  overflow: hidden;
+}
+
+.messages div {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}
+
+.message-form {
+  display: -ms-grid;
+  display: grid;
+}
+
+.message-form input {
+  padding: 0.5rem 0.5rem;
+  width: 98.3%;
+  border: none;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  border: 1px solid #dddddd;
+  border-top: none;
+}
+
+.message-form input:focus {
   outline: none;
 }
 /*# sourceMappingURL=index.css.map */

@@ -46,7 +46,7 @@ const MessageForm = ({
 
   return (
     <form onSubmit={e => handleSubmit(e)} className='message-form'>
-      <textarea
+      <input
         onKeyDown={e => onEnterPress(e)}
         type='text'
         name='text'

@@ -138,7 +138,7 @@ router.get('/messages/:chatId', auth, async (req, res) => {
     let chat
     const chats = await Chat.find({
       users: { $elemMatch: { user: ObjectId(req.user.id) } }
-    })
+    }).populate({ path: 'messages.user', select: 'name' })
 
     chats.forEach(pm => {
       pm.users.forEach(user => {
@@ -169,7 +169,7 @@ router.get('/:userId', auth, async (req, res) => {
     let chat
     const chats = await Chat.find({
       users: { $elemMatch: { user: ObjectId(req.user.id) } }
-    })
+    }).populate({ path: 'messages.user', select: 'name' })
 
     chats.forEach(pm => {
       pm.users.forEach(user => {

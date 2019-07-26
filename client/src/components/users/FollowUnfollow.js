@@ -29,9 +29,11 @@ const FollowUnfollow = ({
   const followersNumber = followers.length != 0 ? followers.length : null
 
   return !isFollowed ? (
-    <button onClick={() => followUser(_id)}>Follow {followersNumber}</button>
+    <button className='btn-action' onClick={() => followUser(_id)}>
+      Follow {followersNumber}
+    </button>
   ) : (
-    <button onClick={() => unfollowUser(_id)}>
+    <button className='btn-action' onClick={() => unfollowUser(_id)}>
       Unfollow {followersNumber}
     </button>
   )

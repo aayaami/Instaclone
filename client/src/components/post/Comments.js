@@ -4,19 +4,19 @@ import PropTypes from 'prop-types'
 
 const Comments = ({ comments, auth: { user } }) => {
   return comments ? (
-    <ul>
+    <div className='comments'>
       {comments.map(comment =>
         user._id == comment.user ? (
-          <li>
-            {user.name} {comment.text}
-          </li>
+          <div>
+            <span className='nickname'>{user.name}</span> {comment.text}
+          </div>
         ) : (
-          <li>
-            {comment.user.name} {comment.text}
-          </li>
+          <div>
+            <span className='nickname'>{comment.user.name}</span> {comment.text}
+          </div>
         )
       )}
-    </ul>
+    </div>
   ) : (
     <div> No comments </div>
   )

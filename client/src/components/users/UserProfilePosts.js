@@ -7,24 +7,26 @@ import Comments from '../post/Comments'
 
 const Posts = ({ posts: { posts, postsLoading } }) => {
   if (postsLoading) {
-    return <Fragment>Loading</Fragment>
+    return <Fragment />
   } else if (posts.length < 1) {
-    return <Fragment>No Posts</Fragment>
+    return <Fragment />
   } else {
     return (
-      <ul>
-        {posts.map(post => (
-          <li key={post._id}>
-            <div>
-              <Link to={`/posts/${post._id}`}>
-                <img
-                  src={Buffer.from(post.image, 'base64').toString('ascii')}
-                />
-              </Link>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <section>
+        <ul className='post-grid-wrapper'>
+          {posts.map(post => (
+            <li key={post._id} className='post-grid'>
+              <div>
+                <Link to={`/posts/${post._id}`}>
+                  <img
+                    src={Buffer.from(post.image, 'base64').toString('ascii')}
+                  />
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
     )
   }
 }

@@ -62,7 +62,7 @@ const NewPostForm = ({ createPost }) => {
 
   return (
     <Fragment>
-      <form onSubmit={e => handleSubmit(e)}>
+      <form className='form-comment' onSubmit={e => handleSubmit(e)}>
         <input type='file' onChange={fileSelectedHandler} />
         <div>
           <button type='submit'>Upload</button>

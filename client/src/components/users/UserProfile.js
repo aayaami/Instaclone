@@ -30,21 +30,27 @@ const User = ({
   //   </div>
   // )
   if (loading) {
-    return <Fragment>Loading</Fragment>
+    return <Fragment />
   } else {
     return userProfileLoading ? (
-      <Fragment>Loading</Fragment>
+      <Fragment />
     ) : (
-      <div>
-        {userProfile._id !== user._id ? (
-          <Fragment>
-            <FollowUnfollow userProfile={userProfile} />
-            <Link to={`/chats/${userProfile._id}`}>Send Message</Link>
-          </Fragment>
-        ) : (
-          <Link to='/posts/create'>Create Post</Link>
-        )}
-        {userProfile.name}
+      <div className='content profile-wrapper'>
+        <section className='profile-header'>
+          <span className='nickname'>{userProfile.name}</span>
+          {userProfile._id !== user._id ? (
+            <Fragment>
+              <FollowUnfollow userProfile={userProfile} />
+              <Link className='btn-action' to={`/chats/${userProfile._id}`}>
+                Send Message
+              </Link>
+            </Fragment>
+          ) : (
+            <Link className='btn-action' to='/posts/create'>
+              Create Post
+            </Link>
+          )}
+        </section>
         <UserProfilePosts />
       </div>
     )

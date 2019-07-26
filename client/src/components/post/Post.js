@@ -12,20 +12,22 @@ const Post = ({ loadPost, post: { post, postLoading }, match }) => {
   }, [])
 
   if (postLoading) {
-    return <Fragment>Loading</Fragment>
+    return <Fragment />
   } else if (!post) {
-    return <Fragment>No Post</Fragment>
+    return <Fragment />
   } else {
     return (
-      <Fragment>
-        {post.date}
-        <div>
-          <img src={Buffer.from(post.image, 'base64').toString('ascii')} />
+      <section className='content'>
+        <div className='post'>
+          {post.user.name}
+          <div>
+            <img src={Buffer.from(post.image, 'base64').toString('ascii')} />
+          </div>
+          <LikeUnlike post={post} />
+          <Comments comments={post.comments} />
+          <NewCommentForm postId={post._id} />
         </div>
-        <LikeUnlike post={post} />
-        <Comments comments={post.comments} />
-        <NewCommentForm postId={post._id} />
-      </Fragment>
+      </section>
     )
   }
 }

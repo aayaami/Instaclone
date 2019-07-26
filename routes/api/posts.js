@@ -242,7 +242,7 @@ router.post(
         avatar: user.avatar,
         user: req.user.id
       }
-      post.comments.unshift(newComment)
+      post.comments.push(newComment)
 
       await post.save()
 

@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { loadPostsFeed } from '../../actions/posts'
 import LikeUnlike from '../post/LikeUnlike'
 import Comments from '../post/Comments'
+import NewCommentForm from '../post/NewCommentForm'
+import PostsList from './PostsList'
 
 const Posts = ({ loadPostsFeed, posts: { posts, postsLoading } }) => {
   useEffect(() => {
@@ -12,32 +14,11 @@ const Posts = ({ loadPostsFeed, posts: { posts, postsLoading } }) => {
   }, [])
 
   if (postsLoading) {
-    return <Fragment>Loading</Fragment>
+    return <Fragment />
   } else if (posts.length < 1) {
-    return <Fragment>No Posts</Fragment>
+    return <Fragment />
   } else {
-    return (
-      <ul>
-        {posts.map(post => (
-          <li key={post._id}>
-            <Link to={`/users/${post.user._id}`}>{post.user.name}</Link>
-            {post.image && (
-              <div>
-                <Link to={`/posts/${post._id}`}>
-                  <img
-                    src={Buffer.from(post.image, 'base64').toString('ascii')}
-                  />
-                </Link>
-              </div>
-            )}
-            <div>
-              <LikeUnlike post={post} />
-              <Comments comments={post.comments} />
-            </div>
-          </li>
-        ))}
-      </ul>
-    )
+    return <PostsList posts={posts} />
   }
 }
 

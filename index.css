@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+img {
+  width: 20%;
+}
+
+.css-1dkwqii {
+  overflow: visible !important;
+}
+
+.css-bdjl4r {
+  width: 400px !important;
+  height: 400px !important;
+}
+
+/* Like Button */
+
+.button-like {
+  border: 2px solid #8a8a8a;
+  background-color: transparent;
+  text-decoration: none;
+  padding: 1rem;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3rem;
+  color: #8a8a8a;
+  transition: all ease 0.4s;
+}
+
+.button-like span {
+  margin-left: 0.5rem;
+}
+
+.button-like .fa,
+.button-like span {
+  transition: all ease 0.4s;
+}
+
+.button-like:focus {
+  background-color: transparent;
+}
+
+.button-like:focus .fa,
+.button-like:focus span {
+  color: #8a8a8a;
+}
+
+.button-like:hover {
+  border-color: #cc4b37;
+  background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+  color: #cc4b37;
+}
+
+.liked {
+  border-color: #cc4b37;
+}
+
+.liked .fa,
+.liked span {
+  color: #fefefe;
+}
+
+/* .liked:focus {
+  
+} */
+
+.liked:focus .fa,
+.liked:focus span {
+  color: #fefefe;
+}
+
+.liked:hover {
+  border-color: #8a8a8a;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+  color: #fefefe;
+}
+
+/* Controls */
+.crop-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+}
+
+.controls {
+  background: lightblue;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 20%;
+  margin: 0 0 0 40%;
+  padding: 0 16px;
+  height: 80px;
+  color: #fff;
+  font-size: 4rem;
+  text-align: center;
+}

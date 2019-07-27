@@ -292,11 +292,12 @@ ul {
 }
 
 .messages {
+  padding: 1rem;
   -ms-grid-column-align: center;
       justify-self: center;
-  width: 100%;
   margin-top: 1rem;
   height: 80vh;
+  width: 60vw;
   background: #fff;
   border: 1px solid #dddddd;
   overflow: auto;
@@ -311,11 +312,12 @@ ul {
 .message-form {
   display: -ms-grid;
   display: grid;
+  padding: 0rem 1rem;
 }
 
 .message-form input {
-  padding: 0.5rem 0.5rem;
-  width: 98.3%;
+  padding: 0.5rem 1rem;
+  width: 100%;
   border: none;
   -ms-grid-column-align: center;
       justify-self: center;
@@ -332,11 +334,14 @@ ul {
   background: #fff;
   width: 100%;
   text-align: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
   padding: 1rem;
   margin: 1rem;
 }
 
 .login-register input {
+  padding: 0.5rem 0.5rem;
   border: 1px solid #dddddd;
   width: 90%;
   margin: 0.5rem;

@@ -303,10 +303,11 @@ ul {
 }
 
 .messages {
+  padding: 1rem;
   justify-self: center;
-  width: 100%;
   margin-top: 1rem;
   height: 80vh;
+  width: 60vw;
   background: #fff;
   border: 1px solid rgb(221, 221, 221);
   overflow: auto;
@@ -319,9 +320,10 @@ ul {
 
 .message-form {
   display: grid;
+  padding: 0rem 1rem;
   input {
-    padding: 0.5rem 0.5rem;
-    width: 98.3%;
+    padding: 0.5rem 1rem;
+    width: 100%;
     border: none;
     justify-self: center;
     border: 1px solid rgb(221, 221, 221);
@@ -338,9 +340,11 @@ ul {
   background: #fff;
   width: 100%;
   text-align: center;
+  justify-self: center;
   padding: 1rem;
   margin: 1rem;
   input {
+    padding: 0.5rem 0.5rem;
     border: 1px solid rgb(221, 221, 221);
     width: 90%;
     margin: 0.5rem;

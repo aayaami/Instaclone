@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 const Landing = ({ auth: { isAuthenticated } }) => {
   if (isAuthenticated) {
     return <Redirect to='/posts/feed' />
+  } else {
+    return <Redirect to='/register' />
   }
   return <section className='container' />
 }

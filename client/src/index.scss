@@ -6,14 +6,7 @@
 
 .css-1dkwqii {
   overflow: visible !important;
-  display: none;
 }
-
-.css-bdjl4r {
-  width: 400px !important;
-  height: 400px !important;
-}
-
 .crop-container {
   position: absolute;
   top: 0;
@@ -60,25 +53,63 @@ a {
   grid-template-columns: 1fr 3fr 1fr;
 }
 
+// .navbar {
+//   position: sticky;
+//   top: 0;
+//   background: #fff;
+//   border-bottom: 1px solid #666;
+//   grid-area: navbar;
+//   display: flex;
+//   justify-content: space-between;
+//   height: 50px;
+//   align-content: center;
+
+//   ul {
+//     display: flex;
+//   }
+
+//   li {
+//     height: 100%;
+//     display: inline-block;
+//     align-self: center;
+//     &:hover {
+//       background: #666;
+//       a {
+//         color: #fff;
+//       }
+//     }
+//   }
+
+//   a,
+//   h1 {
+//     position: relative;
+//     top: 30%;
+//   }
+
+//   li a {
+//     display: inline-block;
+//     padding: 0 1rem;
+//     width: 100%;
+//     height: 100%;
+//   }
+
+//   h1 {
+//     top: 0;
+//     margin-left: 1rem;
+//   }
+// }
+
 .navbar {
-  position: sticky;
-  top: 0;
   background: #fff;
-  border-bottom: 1px solid #666;
   grid-area: navbar;
   display: flex;
   justify-content: space-between;
-  height: 50px;
-  align-content: center;
 
   ul {
     display: flex;
   }
 
   li {
-    height: 100%;
-    display: inline-block;
-    align-self: center;
     &:hover {
       background: #666;
       a {
@@ -87,21 +118,19 @@ a {
     }
   }
 
-  a,
-  h1 {
-    position: relative;
-    top: 30%;
+  li {
+    padding: 1rem 1.5rem;
   }
 
-  li a {
-    display: inline-block;
-    padding: 0 1rem;
-    width: 100%;
+  a {
+    text-decoration: none;
+    padding-bottom: 0.5rem;
+    transition: border-color 0.5s;
+  }
+
+  h1 {
     height: 100%;
-  }
-
-  h1 {
-    top: 0;
+    margin-top: 0.8rem;
     margin-left: 1rem;
   }
 }
@@ -219,8 +248,8 @@ ul {
     color: rgb(73, 165, 252);
     font-weight: bold;
     &:hover {
-      border: 1px solid rgb(78, 95, 255);
-      color: rgb(78, 95, 255);
+      border: 1px solid rgb(0, 132, 255);
+      color: rgb(0, 132, 255);
     }
     &:focus {
       outline: none;
@@ -255,6 +284,10 @@ ul {
   }
 }
 
+.post > a {
+  padding: 1rem;
+}
+
 .form-comment {
   border-top: 1px solid rgb(221, 221, 221);
   padding: 0 3% 0 3%;
@@ -276,7 +309,7 @@ ul {
   height: 80vh;
   background: #fff;
   border: 1px solid rgb(221, 221, 221);
-  overflow: hidden;
+  overflow: auto;
   div {
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -297,5 +330,134 @@ ul {
     &:focus {
       outline: none;
     }
+  }
+}
+
+.login-register {
+  border: 1px solid rgb(221, 221, 221);
+  background: #fff;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem;
+  input {
+    border: 1px solid rgb(221, 221, 221);
+    width: 90%;
+    margin: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 20px;
+  }
+  .grid-wrapper {
+    display: grid;
+    grid-template-areas:
+      'navbar '
+      'content';
+    grid-template-rows: auto 1fr;
+  }
+
+  .navbar {
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+
+    li {
+      width: 100vw;
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+
+  h1 {
+    padding: 1rem;
+    padding-top: 0rem;
+  }
+
+  ul {
+    flex-direction: column;
+  }
+
+  .content {
+    grid-area: content;
+    grid-area: content;
+    justify-self: center;
+    display: grid;
+    justify-content: center;
+  }
+
+  .post {
+    width: 65%;
+    min-width: 350px;
+    justify-self: center;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background: #fff;
+    margin: 1rem 0;
+    img {
+      width: 100%;
+      border-top: 1px solid rgb(221, 221, 221);
+      border-bottom: 1px solid rgb(221, 221, 221);
+    }
+    border: 1px solid rgb(221, 221, 221);
+
+    .btn-like,
+    .btn-unlike {
+      width: 25%;
+    }
+  }
+
+  .profile-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+      'profileHeader'
+      'gridWrapper';
+  }
+
+  .profile-header {
+    padding: 1rem;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-area: profileHeader;
+    margin: 5rem 0rem;
+    background: #fff;
+    border: 1px solid rgb(221, 221, 221);
+    .btn-action {
+      margin: 0.5rem 0;
+    }
+  }
+
+  .post-grid-wrapper {
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid rgb(221, 221, 221);
+    grid-area: gridWrapper;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+
+  .post-grid {
+    width: 40%;
+    min-width: 300px;
+    justify-self: center;
+    display: block;
+    img {
+      width: 100%;
+    }
+  }
+
+  .login-register {
+    justify-self: center;
+  }
+
+  .btn-like,
+  .btn-unlike {
+    padding: 0.5rem 0rem;
   }
 }

@@ -126,8 +126,8 @@ const NewPostForm = ({ createPost }) => {
           {formData.croppedImage && (
             <img
               style={{
-                width: '25rem',
-                height: '25rem',
+                width: '15rem',
+                height: '15rem',
                 border: '1px solid #797979'
               }}
               src={`${formData.croppedImage}`}

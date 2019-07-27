@@ -36,15 +36,18 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const { name, email, password, password2 } = formData
 
   return (
-    <section className='container'>
-      <form onSubmit={e => handleSubmit(e)} className='container-full form'>
+    <section className='content'>
+      <form
+        onSubmit={e => handleSubmit(e)}
+        className='message-form login-register'
+      >
         <h1>Register</h1>
         <div>
           <input
             type='text'
             name='name'
             value={name}
-            placeholder='name'
+            placeholder='Name'
             onChange={e => handleChange(e)}
             required
           />
@@ -54,7 +57,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             type='email'
             name='email'
             value={email}
-            placeholder='email'
+            placeholder='Email'
             onChange={e => handleChange(e)}
             required
           />
@@ -64,7 +67,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             type='password'
             name='password'
             value={password}
-            placeholder='password'
+            placeholder='Password'
             onChange={e => handleChange(e)}
             required
             minLength='6'
@@ -75,14 +78,14 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             type='password'
             name='password2'
             value={password2}
-            placeholder='confirm password'
+            placeholder='Confirm password'
             onChange={e => handleChange(e)}
             required
             minLength='6'
           />
         </div>
         <div>
-          <button type='submit' className='btn btn-success'>
+          <button type='submit' className='btn-action'>
             Register
           </button>
         </div>

@@ -179,15 +179,16 @@ a {
   display: grid;
   grid-template-columns: 1, 1fr;
   grid-area: profileHeader;
-  margin: 5rem 0rem;
+  margin: 1rem;
   background: #fff;
   border: 1px solid rgb(221, 221, 221);
   .btn-action {
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
   }
 }
 
 .post-grid-wrapper {
+  margin: 1rem;
   padding: 1rem;
   background: #fff;
   border: 1px solid rgb(221, 221, 221);
@@ -199,7 +200,7 @@ a {
 
 .post-grid {
   width: 40%;
-  min-width: 300px;
+  min-width: 220px;
   justify-self: center;
   display: block;
   img {
@@ -428,12 +429,8 @@ ul {
     display: grid;
     grid-template-columns: 1fr;
     grid-area: profileHeader;
-    margin: 5rem 0rem;
     background: #fff;
     border: 1px solid rgb(221, 221, 221);
-    .btn-action {
-      margin: 0.5rem 0;
-    }
   }
 
   .post-grid-wrapper {

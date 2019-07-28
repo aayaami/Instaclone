@@ -24,7 +24,7 @@ app.use('/api/chats/', require('./routes/api/chats'))
 
 const port = 5000
 
-const server = app.listen(port, () =>
+const server = app.listen(process.env.PORT || port, () =>
   console.log(`Server started on port ${port}`)
 )
 

@@ -11,7 +11,7 @@ const WebSocketIo = ({
 }) => {
   useEffect(() => {
     if (socketLoading && auth.user) {
-      const tempSocket = io('http://localhost:5000')
+      const tempSocket = io('/')
       tempSocket.emit('join chat', auth.user._id)
       //   tempSocket.on('refresh chats', () => {
       //     getUserChats()
